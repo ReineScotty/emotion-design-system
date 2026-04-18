@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import DownloadButton from './components/atoms/DownloadButton'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,25 @@ function App() {
         >
           Count is {count}
         </button>
+
+        <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <DownloadButton 
+            label="Download" 
+            variant="primary" 
+            size="medium"
+            onClick={() => console.log('Download initiated')}
+          />
+          <DownloadButton 
+            label="Export" 
+            variant="secondary" 
+            size="medium"
+          />
+          <DownloadButton 
+            label="Save As" 
+            variant="minimal" 
+            size="medium"
+          />
+        </div>
       </section>
 
       <div className="ticks"></div>

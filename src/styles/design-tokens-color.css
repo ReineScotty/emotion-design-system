@@ -1,0 +1,142 @@
+/**
+ * DESIGN TOKENS: COLOR PALETTE
+ * 
+ * A maximalist, luxury design system for modern web applications.
+ * All colors are defined as CSS variables in HSL format for optimal control and accessibility.
+ * This palette balances opulence with refined restraint—bold without being brashy.
+ */
+
+:root {
+  /* ─────────────────────────────────────────────────────────────
+     PRIMARY COLORS: The Jeweled Foundation
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Deep sapphire—commanding, trustworthy, distinctly modern */
+  --color-primary: hsl(215, 76%, 35%);
+  --color-primary-dark: hsl(215, 80%, 25%);
+  --color-primary-light: hsl(215, 70%, 55%);
+  --color-primary-faint: hsl(215, 70%, 92%);
+  
+  /* ─────────────────────────────────────────────────────────────
+     SECONDARY ACCENTS: Glamorous Counterpoints
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Emerald accent—luxe, organic, draws the eye */
+  --color-accent-glamour: hsl(158, 68%, 45%);
+  --color-accent-glamour-dark: hsl(158, 72%, 32%);
+  --color-accent-glamour-light: hsl(158, 65%, 65%);
+  
+  /* Subtle warmth for layering */
+  --color-accent-subtle: hsl(47, 85%, 58%);
+  --color-accent-subtle-dark: hsl(47, 90%, 42%);
+  --color-accent-subtle-light: hsl(47, 80%, 75%);
+  
+  /* ─────────────────────────────────────────────────────────────
+     NEUTRAL PALETTE: Refined, Sophisticated Grays
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Parchment glow—warm ivory, never sterile white */
+  --color-parchment-glow: hsl(40, 60%, 97%);
+  --color-parchment-cream: hsl(40, 55%, 93%);
+  
+  /* Slate refined—a warm taupe-gray for secondary text */
+  --color-slate-refined: hsl(215, 18%, 58%);
+  --color-slate-refined-subtle: hsl(215, 12%, 72%);
+  
+  /* Charcoal rich—deep, luxurious dark tone */
+  --color-charcoal-rich: hsl(215, 12%, 20%);
+  --color-charcoal-soft: hsl(215, 10%, 28%);
+  
+  /* ─────────────────────────────────────────────────────────────
+     SEMANTIC COLORS: Status & Intent (Luxury Tones)
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Success—a sophisticated forest green, not neon */
+  --color-success-luxe: hsl(140, 65%, 42%);
+  --color-success-luxe-light: hsl(140, 60%, 65%);
+  --color-success-luxe-bg: hsl(140, 55%, 92%);
+  
+  /* Warning—amber with presence, not alarming */
+  --color-warning-amber: hsl(38, 92%, 48%);
+  --color-warning-amber-dark: hsl(38, 95%, 35%);
+  --color-warning-amber-bg: hsl(38, 85%, 88%);
+  
+  /* Error—crimson elegance, commanding but refined */
+  --color-error-crimson: hsl(355, 80%, 45%);
+  --color-error-crimson-dark: hsl(355, 85%, 32%);
+  --color-error-crimson-bg: hsl(355, 75%, 91%);
+  
+  /* Info—sapphire communication, clear and trustful */
+  --color-info-sapphire: hsl(217, 87%, 50%);
+  --color-info-sapphire-dark: hsl(217, 90%, 38%);
+  --color-info-sapphire-bg: hsl(217, 80%, 90%);
+  
+  /* ─────────────────────────────────────────────────────────────
+     INTERACTIVE STATES: Hover, Focus, Disabled
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Hover lift—subtle elevation effect */
+  --color-hover-lift: hsl(0, 0%, 100%);
+  --color-hover-lift-shadow: hsl(0, 0%, 0%, 0.08);
+  
+  /* Focus glow—accessible, luxurious focus ring */
+  --color-focus-glow: hsl(215, 76%, 50%);
+  
+  /* Disabled muted—graceful deprioritization */
+  --color-disabled-muted: hsl(215, 8%, 65%);
+  --color-disabled-bg: hsl(0, 0%, 96%);
+  
+  /* ─────────────────────────────────────────────────────────────
+     BACKDROP & GLASSMORPHISM: Transparency & Depth
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Backdrop obscure—for modals and overlays */
+  --color-backdrop-obscure: hsl(0, 0%, 0%, 0.35);
+  --color-backdrop-light: hsl(0, 0%, 0%, 0.12);
+  
+  /* Glass effect—frosted surface appearance */
+  --color-glass-surface: hsl(215, 25%, 96%, 0.8);
+  --color-glass-border: hsl(215, 20%, 88%, 0.4);
+  
+  /* ─────────────────────────────────────────────────────────────
+     LEGACY & UTILITY: Text, Borders, Dividers
+     ───────────────────────────────────────────────────────────── */
+  
+  /* Text colors—semantic hierarchy */
+  --color-text-primary: var(--color-charcoal-rich);
+  --color-text-secondary: var(--color-slate-refined);
+  --color-text-tertiary: var(--color-slate-refined-subtle);
+  --color-text-inverted: var(--color-parchment-glow);
+  
+  /* Borders & dividers—refined separation */
+  --color-border-primary: hsl(215, 18%, 85%);
+  --color-border-secondary: hsl(215, 12%, 90%);
+  --color-divider: hsl(0, 0%, 92%);
+  
+  /* Background surfaces */
+  --color-bg-primary: var(--color-parchment-glow);
+  --color-bg-secondary: var(--color-parchment-cream);
+  --color-bg-tertiary: hsl(215, 20%, 97%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DARK MODE (Optional Future Implementation)
+   If implementing dark mode, uncomment and customize below:
+   ───────────────────────────────────────────────────────────── */
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: hsl(215, 76%, 55%);
+    --color-primary-dark: hsl(215, 80%, 45%);
+    --color-charcoal-rich: hsl(0, 0%, 95%);
+    --color-slate-refined: hsl(215, 15%, 75%);
+    --color-parchment-glow: hsl(215, 25%, 15%);
+    --color-text-primary: var(--color-parchment-glow);
+    --color-text-secondary: var(--color-slate-refined);
+    --color-bg-primary: hsl(215, 20%, 12%);
+    --color-bg-secondary: hsl(215, 18%, 16%);
+    --color-bg-tertiary: hsl(215, 16%, 20%);
+  }
+}
+*/

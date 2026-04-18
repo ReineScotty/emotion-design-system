@@ -1,0 +1,193 @@
+/**
+ * DOWNLOAD BUTTON COMPONENT
+ * BEM Naming: block__element--modifier
+ * 
+ * Block: .button-download
+ * Elements: __icon, __label
+ * Modifiers: --primary, --secondary, --minimal, --small, --medium, --large, --disabled
+ */
+
+.button-download {
+  /* Base styling: foundation for all variants */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Accessibility: focus state */
+  outline: none;
+  
+  /* Semantic padding defaults (medium size) */
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SIZE MODIFIERS
+   ───────────────────────────────────────────────────────────── */
+
+.button-download--small {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+.button-download--medium {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+.button-download--large {
+  padding: 1rem 1.75rem;
+  font-size: 1.125rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   VARIANT MODIFIERS: PRIMARY (Jeweled Sapphire)
+   ───────────────────────────────────────────────────────────── */
+
+.button-download--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverted);
+  box-shadow: 0 4px 12px rgba(50, 90, 180, 0.25);
+}
+
+.button-download--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 8px 20px rgba(50, 90, 180, 0.35);
+  transform: translateY(-2px);
+}
+
+.button-download--primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(50, 90, 180, 0.2);
+}
+
+.button-download--primary:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-focus-glow);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   VARIANT MODIFIERS: SECONDARY (Emerald Glamour)
+   ───────────────────────────────────────────────────────────── */
+
+.button-download--secondary {
+  background-color: var(--color-accent-glamour);
+  color: var(--color-text-inverted);
+  box-shadow: 0 4px 12px rgba(30, 160, 110, 0.25);
+}
+
+.button-download--secondary:hover:not(:disabled) {
+  background-color: var(--color-accent-glamour-dark);
+  box-shadow: 0 8px 20px rgba(30, 160, 110, 0.35);
+  transform: translateY(-2px);
+}
+
+.button-download--secondary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(30, 160, 110, 0.2);
+}
+
+.button-download--secondary:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-accent-glamour-light);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   VARIANT MODIFIERS: MINIMAL (Refined Elegance)
+   ───────────────────────────────────────────────────────────── */
+
+.button-download--minimal {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
+}
+
+.button-download--minimal:hover:not(:disabled) {
+  background-color: var(--color-primary-faint);
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
+}
+
+.button-download--minimal:active:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverted);
+}
+
+.button-download--minimal:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-focus-glow);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DISABLED STATE (All Variants)
+   ───────────────────────────────────────────────────────────── */
+
+.button-download--disabled,
+.button-download:disabled {
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
+}
+
+.button-download--disabled:hover,
+.button-download:disabled:hover {
+  transform: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ICON & LABEL ELEMENTS (BEM)
+   ───────────────────────────────────────────────────────────── */
+
+.button-download__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  line-height: 1;
+  animation: float-animation 2s ease-in-out infinite;
+}
+
+.button-download__label {
+  display: inline-block;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ANIMATION: Subtle Floating Icon
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes float-animation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE: Adjust for smaller screens
+   ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .button-download {
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .button-download__icon {
+    font-size: 1em;
+  }
+}
