@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion Design System</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-page:    #0c1624;
+      --bg-card:    #121d2d;
+      --bg-raised:  #182338;
+      --bg-input:   #131f30;
+      --green:      #2d7a4f;
+      --green-hi:   #3a9462;
+      --green-lo:   #1f5c39;
+      --green-glow: rgba(45,122,79,0.22);
+      --green-text: #52c27a;
+      --border:     #1c2e44;
+      --text-1:     #dce8f5;
+      --text-2:     #7a96b2;
+      --text-3:     #3a5268;
+      --font: 'Inter', sans-serif;
+    }
+
+    * { font-weight: 400 !important; }
+
+    body {
+      background: var(--bg-page);
+      font-family: var(--font);
+      color: var(--text-1);
+      min-height: 100vh;
+      padding: 3rem 2rem 5rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      color: var(--text-1);
+      margin-bottom: 3rem;
+      letter-spacing: -0.3px;
+    }
+
+    /* GRID LAYOUT */
+    .row {
+      display: grid;
+      gap: 1.2rem;
+      max-width: 1080px;
+      margin: 0 auto 1.2rem;
+    }
+    .row-3 { grid-template-columns: repeat(3, 1fr); }
+    .row-2 { grid-template-columns: repeat(2, 1fr); }
+
+    /* BOX */
+    .box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.6rem;
+    }
+
+    .box-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.4rem;
+    }
+
+    .box-title {
+      font-size: 1.55rem;
+      color: var(--text-1);
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.2px;
+    }
+
+    .box-sub {
+      font-size: 0.78rem;
+      color: var(--text-2);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Primary */
+    .btn-p { background: var(--green); color: #fff; padding: 9px 22px; }
+    .btn-p:hover { background: var(--green-hi); box-shadow: 0 0 0 3px var(--green-glow); }
+    .btn-p:active { background: var(--green-lo); transform: scale(0.96); }
+    .btn-p.sm { padding: 6px 15px; font-size: 0.72rem; }
+    .btn-p.lg { padding: 12px 28px; font-size: 0.88rem; }
+    .btn-p.dis { background: var(--bg-raised); color: var(--text-3); cursor: not-allowed; pointer-events: none; }
+
+    /* Outline */
+    .btn-o { background: transparent; border: 1.5px solid var(--green); color: var(--green); padding: 8px 21px; }
+    .btn-o:hover { background: var(--green-glow); border-color: var(--green-hi); color: var(--green-hi); }
+    .btn-o:active { transform: scale(0.96); }
+    .btn-o.sm { padding: 5px 14px; font-size: 0.72rem; }
+    .btn-o.lg { padding: 11px 27px; font-size: 0.88rem; }
+    .btn-o.dis { border-color: var(--text-3); color: var(--text-3); cursor: not-allowed; pointer-events: none; }
+
+    /* Ghost */
+    .btn-g { background: transparent; color: var(--green); padding: 9px 22px; }
+    .btn-g:hover { background: var(--green-glow); }
+    .btn-g:active { transform: scale(0.96); }
+    .btn-g.sm { padding: 6px 15px; font-size: 0.72rem; }
+    .btn-g.lg { padding: 12px 28px; font-size: 0.88rem; }
+    .btn-g.dis { color: var(--text-3); cursor: not-allowed; pointer-events: none; }
+
+    /* ── INPUT ── */
+    .inp-section { margin-bottom: 1rem; }
+
+    .state-label {
+      font-size: 0.62rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 0.45rem;
+    }
+
+    .inp {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 15px;
+      color: var(--text-1);
+      font-family: var(--font);
+      font-size: 0.83rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .inp::placeholder { color: var(--text-3); }
+    .inp:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+    .inp.focus-show { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+    .inp.error-show { border-color: var(--green); }
+    .inp-err { display: flex; align-items: center; gap: 5px; margin-top: 5px; font-size: 0.73rem; color: var(--green-text); }
+
+    /* ── BADGES ── */
+    .badge-section { margin-bottom: 1rem; }
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .badge {
+      border-radius: 50px;
+      font-size: 0.74rem;
+      padding: 6px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .badge:hover { opacity: 0.8; }
+    .badge:active { transform: scale(0.96); }
+
+    .badge-default  { background: var(--bg-raised); color: var(--text-2); border: 1px solid var(--border); }
+    .badge-active   { background: var(--green); color: #c8f0d8; }
+    .badge-disabled { background: var(--bg-raised); color: var(--text-3); border: 1px solid var(--border); opacity: 0.45; cursor: not-allowed; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+    /* ── ALERTS ── */
+    .alert {
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+      line-height: 1.55;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .alert:hover { opacity: 0.85; }
+    .alert:active { transform: scale(0.99); }
+
+    .alert-info    { background: rgba(45,122,79,0.1);  color: var(--text-2);     border: 1px solid rgba(45,122,79,0.22); }
+    .alert-success { background: rgba(45,122,79,0.16); color: var(--green-text); border: 1px solid rgba(45,122,79,0.38); }
+    .alert-error   { background: rgba(45,122,79,0.13); color: var(--green-text); border: 1px solid rgba(45,122,79,0.32); }
+
+    /* ── CARD ── */
+    .card-label {
+      font-size: 0.62rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.55rem;
+    }
+
+    .profile-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .profile-card:hover { border-color: var(--green); }
+    .profile-card:active { transform: scale(0.98); }
+    .profile-card.hover-show { border-color: var(--green); }
+
+    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+
+    .avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      color: #c8f0d8;
+      flex-shrink: 0;
+    }
+
+    .card-name   { font-size: 0.87rem; color: var(--text-1); }
+    .card-handle { font-size: 0.73rem; color: var(--text-2); }
+    .card-desc   { font-size: 0.77rem; color: var(--text-2); margin-bottom: 12px; line-height: 1.5; }
+
+    .btn-view {
+      background: transparent;
+      border: 1.5px solid var(--green);
+      color: var(--green);
+      border-radius: 50px;
+      font-family: var(--font);
+      font-size: 0.73rem;
+      padding: 6px 18px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-view:hover { background: var(--green-glow); }
+
+    /* Skeleton */
+    .skeleton-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .sk-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .sk-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--border); flex-shrink: 0; animation: pulse 1.4s infinite; }
+    .sk-line { height: 10px; border-radius: 6px; background: var(--border); animation: pulse 1.4s infinite; margin-bottom: 8px; }
+    .sk-btn { height: 30px; width: 100px; border-radius: 50px; background: var(--border); animation: pulse 1.4s infinite; margin-top: 4px; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; }
+      50%       { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Emotion Design System</h1>
+<div id="root"></div>
+
+<script type="text/babel">
+  const { useState } = React;
+
+  /* ── BOX 1 — Button Primary ── */
+  function Box1() {
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 1</div>
+        <div className="box-title">Project A</div>
+        <div className="box-sub">Variation 1 — Primary</div>
+        <div className="btn-row">
+          <button className="btn btn-p sm">Small</button>
+          <button className="btn btn-p">Default</button>
+        </div>
+        <div className="btn-row">
+          <button className="btn btn-p lg">Large</button>
+          <button className="btn btn-p dis">Disabled</button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── BOX 2 — Button Outline ── */
+  function Box2() {
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 2</div>
+        <div className="box-title">Project B</div>
+        <div className="box-sub">Variation 2 — Outline</div>
+        <div className="btn-row">
+          <button className="btn btn-o sm">Small</button>
+          <button className="btn btn-o">Default</button>
+        </div>
+        <div className="btn-row">
+          <button className="btn btn-o lg">Large</button>
+          <button className="btn btn-o dis">Disabled</button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── BOX 3 — Button Ghost ── */
+  function Box3() {
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 3</div>
+        <div className="box-title">Project C</div>
+        <div className="box-sub">Variation 3 — Ghost</div>
+        <div className="btn-row">
+          <button className="btn btn-g sm">Small</button>
+          <button className="btn btn-g">Default</button>
+        </div>
+        <div className="btn-row">
+          <button className="btn btn-g lg">Large</button>
+          <button className="btn btn-g dis">Disabled</button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── BOX 4 — Input Field ── */
+  function Box4() {
+    const [val, setVal] = useState('');
+    const [focusVal, setFocusVal] = useState('');
+    const [errorVal, setErrorVal] = useState('invalid@email');
+
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 4</div>
+        <div className="box-title">Input Field</div>
+        <div className="box-sub">States — Default, Focus, Error</div>
+
+        <div className="inp-section">
+          <div className="state-label">Default</div>
+          <input
+            className="inp"
+            placeholder="Enter value..."
+            value={val}
+            onChange={e => setVal(e.target.value)}
+          />
+        </div>
+
+        <div className="inp-section">
+          <div className="state-label">Focus</div>
+          <input
+            className="inp focus-show"
+            placeholder="Enter value..."
+            value={focusVal}
+            onChange={e => setFocusVal(e.target.value)}
+          />
+        </div>
+
+        <div className="inp-section">
+          <div className="state-label">Error</div>
+          <input
+            className="inp error-show"
+            value={errorVal}
+            onChange={e => setErrorVal(e.target.value)}
+          />
+          <div className="inp-err">
+            <span>⊙</span>
+            <span>Please enter a valid email address</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── BOX 5 — Badge ── */
+  function Box5() {
+    const [active, setActive] = useState(null);
+
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 5</div>
+        <div className="box-title">Badge</div>
+        <div className="box-sub">States — Default, Active, Disabled</div>
+
+        <div className="badge-section">
+          <div className="state-label">Default</div>
+          <div className="badge-row">
+            {['New', 'Preview', 'v2.4.0'].map(t => (
+              <span key={t} className="badge badge-default" onClick={() => setActive(t)}>{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="badge-section">
+          <div className="state-label">Active</div>
+          <div className="badge-row">
+            {['Live', 'Active', 'Online'].map(t => (
+              <span key={t} className="badge badge-active">
+                <span className="badge-dot" />{t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="badge-section">
+          <div className="state-label">Disabled</div>
+          <div className="badge-row">
+            {['Archived', 'Offline', 'Paused'].map(t => (
+              <span key={t} className="badge badge-disabled">{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── BOX 6 — Alert ── */
+  function Box6() {
+    const [dismissed, setDismissed] = useState({});
+
+    const alerts = [
+      { type: 'info',    label: 'Info',    text: 'Your session will expire in 15 minutes.' },
+      { type: 'success', label: 'Success', text: 'Changes saved successfully.' },
+      { type: 'error',   label: 'Error',   text: 'Something went wrong. Please try again.' },
+    ];
+
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 6</div>
+        <div className="box-title">Alert</div>
+        <div className="box-sub">Variants — Info, Success, Error</div>
+
+        {alerts.map(a => !dismissed[a.type] && (
+          <div
+            key={a.type}
+            className={`alert alert-${a.type}`}
+            onClick={() => setDismissed(d => ({...d, [a.type]: true}))}
+          >
+            <span style={{color: 'inherit'}}>{a.label}.</span> {a.text} <span style={{float:'right', opacity:0.5, fontSize:'0.7rem'}}>click to dismiss</span>
+          </div>
+        ))}
+
+        {Object.keys(dismissed).length === alerts.length && (
+          <div
+            style={{fontSize:'0.75rem', color:'var(--text-3)', cursor:'pointer', marginTop:'0.5rem'}}
+            onClick={() => setDismissed({})}
+          >
+            ↺ Reset alerts
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  /* ── BOX 7 — Card ── */
+  function Box7() {
+    const [hovered, setHovered] = useState(false);
+
+    const ProfileCard = ({ isHover }) => (
+      <div
+        className={`profile-card${isHover ? ' hover-show' : ''}`}
+        onMouseEnter={() => isHover && setHovered(true)}
+        onMouseLeave={() => isHover && setHovered(false)}
+      >
+        <div className="card-top">
+          <div className="avatar">EA</div>
+          <div>
+            <div className="card-name">Emotion Agent</div>
+            <div className="card-handle">@emotion.sys</div>
+          </div>
+        </div>
+        <div className="card-desc">Adaptive interface layer for emotional design systems.</div>
+        <button className="btn-view">View Profile</button>
+      </div>
+    );
+
+    return (
+      <div className="box">
+        <div className="box-eyebrow">BOX 7</div>
+        <div className="box-title">Card</div>
+        <div className="box-sub">States — Default, Hover, Loading</div>
+
+        <div className="card-label">Default</div>
+        <ProfileCard isHover={false} />
+
+        <div className="card-label">Hover (Green Border)</div>
+        <ProfileCard isHover={true} />
+
+        <div className="card-label">Loading (Skeleton)</div>
+        <div className="skeleton-card">
+          <div className="sk-top">
+            <div className="sk-circle" />
+            <div style={{flex:1}}>
+              <div className="sk-line" style={{width:'60%'}} />
+              <div className="sk-line" style={{width:'40%', marginBottom:0}} />
+            </div>
+          </div>
+          <div className="sk-line" style={{width:'100%'}} />
+          <div className="sk-line" style={{width:'75%'}} />
+          <div className="sk-line" style={{width:'50%'}} />
+          <div className="sk-btn" />
+        </div>
+      </div>
+    );
+  }
+
+  /* ── APP ── */
+  function App() {
+    return (
+      <>
+        <div className="row row-3">
+          <Box1 /><Box2 /><Box3 />
+        </div>
+        <div className="row row-2">
+          <Box4 /><Box5 />
+        </div>
+        <div className="row row-2">
+          <Box6 /><Box7 />
+        </div>
+      </>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
