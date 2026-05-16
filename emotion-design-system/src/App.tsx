@@ -1,87 +1,21 @@
 import './App.css'
 import './components/atoms/Button.css'
+import { Routes, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
 
 function App() {
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#111827',
-      padding: '48px 40px',
-      fontFamily: 'inherit'
-    }}>
-      <h1 style={{ color: '#ffffff', textAlign: 'center', marginBottom: '48px', fontSize: '2.5rem' }}>
-        Emotion Design System
-      </h1>
+    <div>
+      <nav style={{ padding: '20px 40px', background: '#0b1220', display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontWeight: 600 }}>Home</Link>
+        <Link to="/about" style={{ color: '#9ca3af', textDecoration: 'none' }}>About</Link>
+      </nav>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '24px',
-        maxWidth: '1100px',
-        margin: '0 auto'
-      }}>
-
-        {/* Card 1 */}
-        <div style={{
-          backgroundColor: '#1f2937',
-          borderRadius: '20px',
-          padding: '32px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.4)'
-        }}>
-          <p style={{ color: '#6b7280', fontSize: '12px', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Box 1</p>
-          <h2 style={{ color: '#ffffff', fontSize: '1.25rem', marginBottom: '8px' }}>Project A</h2>
-          <p style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '28px' }}>Variation 1 — Primary</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
-              <button className="btn btn-primary btn-sm">Small</button>
-              <button className="btn btn-primary btn-base">Default</button>
-              <button className="btn btn-primary btn-lg">Large</button>
-              <button className="btn btn-primary btn-base" disabled>Disabled</button>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2 */}
-        <div style={{
-          backgroundColor: '#1f2937',
-          borderRadius: '20px',
-          padding: '32px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.4)'
-        }}>
-          <p style={{ color: '#6b7280', fontSize: '12px', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Box 2</p>
-          <h2 style={{ color: '#ffffff', fontSize: '1.25rem', marginBottom: '8px' }}>Project B</h2>
-          <p style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '28px' }}>Variation 2 — Outline</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
-              <button className="btn btn-outline btn-sm">Small</button>
-              <button className="btn btn-outline btn-base">Default</button>
-              <button className="btn btn-outline btn-lg">Large</button>
-              <button className="btn btn-outline btn-base" disabled>Disabled</button>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3 */}
-        <div style={{
-          backgroundColor: '#1f2937',
-          borderRadius: '20px',
-          padding: '32px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.4)'
-        }}>
-          <p style={{ color: '#6b7280', fontSize: '12px', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Box 3</p>
-          <h2 style={{ color: '#ffffff', fontSize: '1.25rem', marginBottom: '8px' }}>Project C</h2>
-          <p style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '28px' }}>Variation 3 — Ghost</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
-              <button className="btn btn-ghost btn-sm">Small</button>
-              <button className="btn btn-ghost btn-base">Default</button>
-              <button className="btn btn-ghost btn-lg">Large</button>
-              <button className="btn btn-ghost btn-base" disabled>Disabled</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
   )
 }
